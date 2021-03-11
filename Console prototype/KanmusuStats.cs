@@ -1,6 +1,6 @@
 ﻿namespace Console_prototype
 {
-    public class KanmusuStats
+    public sealed class KanmusuStats
     {
         public int Hp
         {

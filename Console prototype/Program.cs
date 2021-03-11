@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 
 namespace Console_prototype
 {
@@ -6,7 +8,14 @@ namespace Console_prototype
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var battleField = BattleField.Instance;
+            BattleField.AddFront(new Kanmusu(KanmusuNames.Akagi));
+            BattleField.AddBack(new Kanmusu(KanmusuNames.Kaga));
+            
+            BattleField.EnemyAddFront(new Kanmusu(KanmusuNames.Ashigara));
+            BattleField.EnemyAddBack(new Kanmusu(KanmusuNames.Chikuma));
+    
+            BattleField.PlayTurn();
         }
     }
 }

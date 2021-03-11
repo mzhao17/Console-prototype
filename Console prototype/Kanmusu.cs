@@ -4,8 +4,55 @@
 
 namespace Console_prototype
 {
-    public  class Kanmusu
+    public  class Kanmusu:IEquatable<Kanmusu>
     {
+        public KanmusuClass Class => _class;
+        
+
+        public string Name => _name;
+
+        public int Hp
+        {
+            get => _hp;
+            set => _hp = value;
+        }
+
+        public int Armour
+        {
+            get => _armour;
+            set => _armour = value;
+        }
+
+        public int Speed
+        {
+            get => _speed;
+            set => _speed = value;
+        }
+
+        public int FirePower
+        {
+            get => _firePower;
+            set => _firePower = value;
+        }
+
+        public int Torpedo
+        {
+            get => _torpedo;
+            set => _torpedo = value;
+        }
+
+        public int Aircraft
+        {
+            get => _aircraft;
+            set => _aircraft = value;
+        }
+
+        public int AttackNum
+        {
+            get => _attackNum;
+            set => _attackNum = value;
+        }
+
         private readonly int _hpBase;
         private readonly int _armourBase;
         private readonly int _speedBase;
@@ -24,21 +71,26 @@ namespace Console_prototype
         private int _aircraft;
         private int _attackNum;
         
+        private const int MinAttack = 1;
 
 
-        protected Kanmusu(string name)
+        public Kanmusu(string name)
         {
             _name = name;
             var type = KanmusuData.GetTypeFromName(name);
             var stats = KanmusuData.GetStatsFromType(type);
-            _hpBase = stats.Hp;
-            _armourBase = stats.Armour;
-            _speedBase = stats.Speed;
-            _firePowerBase = stats.FirePower;
-            _torpedoBase = stats.Torpedo;
-            _aircraftBase = stats.Aircraft;
-            _class = stats.Class;
-            _attackNumBase = stats.AttackNum;
+            if (stats != null)
+            {
+                _hpBase =  stats.Hp;
+                _armourBase = stats.Armour;
+                _speedBase = stats.Speed;
+                _firePowerBase = stats.FirePower;
+                _torpedoBase = stats.Torpedo;
+                _aircraftBase = stats.Aircraft;
+                _class = stats.Class;
+                _attackNumBase = stats.AttackNum;
+            }
+  
             ResetStats();
         }
 
@@ -53,33 +105,67 @@ namespace Console_prototype
             _attackNum = _attackNumBase;
         }
 
-        protected virtual void NormalAttack(Kanmusu other)
+        public void NormalAttack(Kanmusu other)
         {
-            var damage = Math.Clamp(_firePower,1, _firePower);
+            var damage = Math.Clamp(_firePower,MinAttack, _firePower);
             if (_armour > 0)
             {
                 other._armour -= damage;
+                if (other._armour < 0)
+                {
+                    other._armour = 0;
+                }
             }
             else
             {
                 other._hp -= damage;
+                if (other._hp < 0)
+                {
+                    other._hp = 0;
+                }
             }
         }
 
-        protected virtual void TorpedoAttack(Kanmusu other)
+        public  void TorpedoAttack(Kanmusu other)
         {
-            other._hp -= Math.Clamp(_torpedo,1, _torpedo);
+            other._hp -= Math.Clamp(_torpedo,MinAttack, _torpedo);
+            if (other._hp < 0)
+            {
+                other._hp = 0;
+            }
         }
 
-        protected virtual void AirAttack(Kanmusu other)
+        public  void AirAttack(Kanmusu other)
         {
             var random = new Random();
             var damage = random.Next(_aircraft / 2, _aircraft);
-            other._hp -= Math.Clamp(damage,1, damage);
+            other._hp -= Math.Clamp(damage,MinAttack, damage);
+            if (other._hp < 0)
+            {
+                other._hp = 0;
+            }
             
         }
-        
-        
+
+
+        public bool Equals(Kanmusu other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _name == other._name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == this.GetType() && Equals((Kanmusu) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_name != null ? _name.GetHashCode() : 0);
+        }
     }
     
 }
