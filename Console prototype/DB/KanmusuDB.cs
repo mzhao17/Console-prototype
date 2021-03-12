@@ -8,17 +8,24 @@ namespace Console_prototype.DB
         //private static readonly Lazy<KanmusuDatabase> Lazy = new Lazy<KanmusuDatabase>(() => new KanmusuDatabase());
         //public static KanmusuDatabase Instance => Lazy.Value;
         private static readonly List<string> Names = KanmusuData.GetKanmusuNames();
-        public static readonly Dictionary<string,Kanmusu> NameDict = new ();
+        private static  Dictionary<string,Kanmusu> _nameDict = new ();
         
         
          static KanmusuDatabase()
         {
             foreach (var name in Names)
             {
-                NameDict.Add(name,new Kanmusu(name));
+                _nameDict.Add(name,new Kanmusu(name));
             }
             
         }
+
+         public static ref Dictionary<string,Kanmusu> GetKanmusu()
+         {
+
+             return ref _nameDict; 
+         }
+            
          
          
 

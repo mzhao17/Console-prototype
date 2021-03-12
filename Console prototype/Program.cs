@@ -10,7 +10,9 @@ namespace Console_prototype
         static void Main(string[] args)
         {
             var battleField = BattleField.Instance;
-            Console.Out.WriteLine(KanmusuDatabase.NameDict[KanmusuNames.Akagi].Name);
+            var test = KanmusuDatabase.GetKanmusu();
+            
+            Console.Out.WriteLine(test[KanmusuNames.Akagi].Name);
             
         }
     }
