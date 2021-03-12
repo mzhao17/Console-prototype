@@ -1,4 +1,4 @@
-﻿namespace Console_prototype
+﻿namespace Console_prototype.DB
 {
     public sealed class KanmusuNames
     {

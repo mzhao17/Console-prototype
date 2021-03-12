@@ -1,4 +1,4 @@
-﻿namespace Console_prototype
+﻿namespace Console_prototype.DB
 {
     public sealed class KanmusuStats
     {
@@ -36,13 +36,7 @@
         {
             get => _aircraft;
             set => _aircraft = value;
-        }
-
-        public KanmusuClass Class
-        {
-            get => _class;
-            set => _class = value;
-        }
+        } 
 
         public int AttackNum
         {
@@ -56,9 +50,9 @@
         private int _firePower;
         private int _torpedo;
         private int _aircraft;
-        private KanmusuClass _class;
+        //private KanmusuClass _class;
         private int _attackNum;
-        public KanmusuStats(int hp, int armour, int speed, int firePower, int torpedo, int aircraft, KanmusuClass @class, int attackNum)
+        public KanmusuStats(int hp, int armour, int speed, int firePower, int torpedo, int aircraft, int attackNum)
         {
             _hp = hp;
             _armour = armour;
@@ -66,7 +60,7 @@
             _firePower = firePower;
             _torpedo = torpedo;
             _aircraft = aircraft;
-            _class = @class;
+            //_class = @class;
             _attackNum = attackNum;
         }
     }

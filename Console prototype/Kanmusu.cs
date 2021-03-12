@@ -1,4 +1,6 @@
 ﻿using System;
+using Console_prototype.DB;
+
 //using System.Data.Common;
 //using System.Net.Mail;
 
@@ -87,7 +89,7 @@ namespace Console_prototype
                 _firePowerBase = stats.FirePower;
                 _torpedoBase = stats.Torpedo;
                 _aircraftBase = stats.Aircraft;
-                _class = stats.Class;
+                _class = KanmusuData.GetClassData(type);
                 _attackNumBase = stats.AttackNum;
             }
   

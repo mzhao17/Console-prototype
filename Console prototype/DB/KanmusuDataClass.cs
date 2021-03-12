@@ -1,4 +1,4 @@
-﻿namespace Console_prototype
+﻿namespace Console_prototype.DB
 {
     public enum KanmusuDataClass
     {
@@ -17,6 +17,7 @@
         ShimakazeClass,
         TenryuuClass,
         SendaiClass,
-        NagatoClass
+        NagatoClass,
+        
     }
 }
