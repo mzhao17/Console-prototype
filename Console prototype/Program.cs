@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+
 using Console_prototype.DB;
 
 
@@ -7,13 +7,24 @@ namespace Console_prototype
 {
     internal static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var battleField = BattleField.Instance;
-            var test = KanmusuDatabase.GetKanmusu();
             
-            Console.Out.WriteLine(test[KanmusuNames.Akagi].Name);
-            
+            Console.Out.WriteLine(DisplayShip.PrintShip());
+            Console.Out.WriteLine(DisplayShip.PrintShip());
+            KanmusuAttack.AirAttack(KanmusuNames.Ashigara,KanmusuNames.Chikuma);
+            Console.Out.WriteLine(DisplayShip.PrintAction());
+            Console.Out.WriteLine(DisplayShip.PrintShip());
+            KanmusuAttack.TorpedoAttack(KanmusuNames.Chikuma,KanmusuNames.Ashigara);
+            Console.Out.WriteLine(DisplayShip.PrintAction());
+            Console.Out.WriteLine(DisplayShip.PrintShip());
+            KanmusuAttack.TorpedoAttack(KanmusuNames.Ashigara,KanmusuNames.Chikuma);
+            Console.Out.WriteLine(DisplayShip.PrintAction());
+            Console.Out.WriteLine(DisplayShip.PrintShip());
+            KanmusuAttack.AirAttack(KanmusuNames.Chikuma,KanmusuNames.Ashigara);
+            Console.Out.WriteLine(DisplayShip.PrintAction());
+            Console.Out.WriteLine(DisplayShip.PrintShip());
+
         }
     }
 }
