@@ -16,5 +16,7 @@ namespace Console_prototype
         public string AttackType { get; set; }
         
         public int Turns { get; set; }
+        
+        public KanmusuStatus Flag { get; set; }
     }
 }

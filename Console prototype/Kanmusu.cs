@@ -45,11 +45,11 @@ namespace Console_prototype
         {
             Name = name ?? throw new ArgumentNullException(nameof(Name));
 
-            var kanmusuData = KanmusuData.Instance;
-            var type = kanmusuData.GetTypeFromName(name);
-            Class = kanmusuData.GetClassData(type);
+            //var kanmusuData = new KanmusuData();
+            var type = KanmusuData.GetTypeFromName(name);
+            Class = KanmusuData.GetClassData(type);
 
-            var stats = kanmusuData.GetStatsFromType(type);
+            var stats = KanmusuData.GetStatsFromType(type);
             if (stats != null)  
             {
                 _hpBase =  stats.Hp;

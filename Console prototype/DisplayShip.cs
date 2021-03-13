@@ -3,75 +3,39 @@
 
 namespace Console_prototype
 {
-    public static class DisplayShip
+    public class DisplayShip
     {
-        public static string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
+        public  string Name { get; set; }
 
-        public static int Hp
-        {
-            get => _hp;
-            set => _hp = value;
-        }
+        public  int Hp { get; set; }
 
-        public static int Armour
-        {
-            get => _armour;
-            set => _armour = value;
-        }
+        public  int Armour { get; set; }
 
-        public static int Turns
-        {
-            get => _turns;
-            set => _turns = value;
-        }
+        public  int Turns { get; set; }
 
-        public static string OtherName
-        {
-            get => _otherName;
-            set => _otherName = value;
-        }
+        public  string OtherName { get; set; }
 
-        public static int Damage
-        {
-            get => _damage;
-            set => _damage = value;
-        }
+        public  int Damage { get; set; }
 
-        public static string AttackType
-        {
-            get => _attackType;
-            set => _attackType = value;
-        }
+        public  string AttackType { get; set; }
 
-        private static string _name;
-        private static int _hp;
-        private static int _armour;
-        private static int _turns;
-        private static string _otherName;
-        private static int _damage;
-        private static string _attackType;
-
-        static DisplayShip()
+        public DisplayShip()
         {
 
             KanmusuMediator.Instance.KanmusuDisplayChanged += (_, e) =>
             {
-                _hp = e.Hp;
-                _armour = e.Armour;
-                _otherName = e.TargetName;
-                _damage = e.Damage;
-                _attackType = e.AttackType;
-                _turns = e.Turns;
-                _name = e.SelfName;
+                Hp = e.Hp;
+                Armour = e.Armour;
+                OtherName = e.TargetName;
+                Damage = e.Damage;
+                AttackType = e.AttackType;
+                Turns = e.Turns;
+                Name = e.SelfName;
             };
         }
         
-        public static string PrintShip () => _name + " " + _hp + "/" + _armour + " :" + _turns;
-        public static string PrintAction () => _name + " did " + _damage + " " + _attackType + " attack to " + _otherName;
+        public string PrintShipDebug () => OtherName + " " + Hp + "/" + Armour + " :" + Turns;
+        public string PrintActionDebug () => Name + " did " + Damage + " " + AttackType + " attack to " + OtherName;
         
 
     }

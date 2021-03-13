@@ -15,7 +15,7 @@ namespace Console_prototype
         public event EventHandler<KanmusuDisplayEventArgs> KanmusuDisplayChanged;
 
         public void OnKanmusuDisplayChanged(object sender, int hp, int armour, string name, int damage,
-            string attackType, int turns, string selfName)
+            string attackType, int turns, string selfName, KanmusuStatus flag)
         {
             var kanmusuDisplayDelegate = KanmusuDisplayChanged;
             kanmusuDisplayDelegate?.Invoke(sender, new KanmusuDisplayEventArgs
@@ -26,7 +26,8 @@ namespace Console_prototype
                 Damage = damage,
                 AttackType = attackType,
                 Turns = turns,
-                SelfName = selfName
+                SelfName = selfName,
+                Flag = flag
             });
         }
     }
