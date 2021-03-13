@@ -72,6 +72,8 @@ namespace Console_prototype
         private int _torpedo;
         private int _aircraft;
         private int _attackNum;
+        private readonly Random _random = new ();
+
         
         private const int MinAttack = 1;
 
@@ -139,8 +141,7 @@ namespace Console_prototype
 
         public  void AirAttack(Kanmusu other)
         {
-            var random = new Random();
-            var damage = random.Next(_aircraft / 2, _aircraft);
+            var damage = _random.Next(_aircraft / 2, _aircraft);
             other._hp -= Math.Clamp(damage,MinAttack, damage);
             if (other._hp < 0)
             {
