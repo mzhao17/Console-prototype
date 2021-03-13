@@ -37,7 +37,7 @@ namespace Console_prototype
                 Status = e.Flag;
             };
         }
-        public string PrintShipDebug() => OtherName + " " + Hp + "/" + Armour + " :" + Turns;
+        public string PrintShipDebug() => OtherName + " has " + Hp + " hp, " + Armour + " armour, " + Turns + " turns left";
 
 
 

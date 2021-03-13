@@ -12,7 +12,12 @@ namespace Console_prototype
 
     public  class Kanmusu:IEquatable<Kanmusu>
     {
-        
+        public int HpBase => _hpBase;
+
+        public int ArmourBase => _armourBase;
+
+        public int AttackNumBase => _attackNumBase;
+
         public KanmusuClass Class { get; set; }
 
         public string Name { get; }

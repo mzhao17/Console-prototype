@@ -167,9 +167,12 @@ namespace Console_prototype
             foreach (var ship in ships)
             {
                 var hp = KanmusuDatabase.GetKanmusu()[ship].Hp;
+                var maxHp = KanmusuDatabase.GetKanmusu()[ship].HpBase;
                 var armour = KanmusuDatabase.GetKanmusu()[ship].Armour;
                 var turn = KanmusuDatabase.GetKanmusu()[ship].AttackNum;
-                stringResult += ship + " " + hp + "/" + armour + ":" + turn + " ";
+                var maxArmour = KanmusuDatabase.GetKanmusu()[ship].ArmourBase;
+                stringResult += ship + " [ HP " + hp + "/" + maxHp + " | Armour " +  armour + "/" + maxArmour + " | Turns " + turn + " ]";
+                //[ HP 40/40 | Armor 27 | Turns 0 ]
             }
 
             return stringResult;
