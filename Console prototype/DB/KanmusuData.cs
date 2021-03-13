@@ -10,13 +10,18 @@ namespace Console_prototype.DB
 
     public sealed class KanmusuData
     {
-        private static readonly Lazy<KanmusuData> Lazy = new Lazy<KanmusuData>(() => new KanmusuData());
-        public static KanmusuData Instance => Lazy.Value;
+        //public static KanmusuData Instance { get; } = new ();
         
+        
+        private static readonly Lazy<KanmusuData> Lazy = new Lazy<KanmusuData> (() => new KanmusuData());
+
+            public static KanmusuData Instance => Lazy.Value;
+
+
         private readonly Dictionary<KanmusuDataClass, KanmusuStats> _data  = new();
         private readonly Dictionary<string, KanmusuDataClass> _nameData = new();
 
-        private readonly Dictionary<KanmusuDataClass, KanmusuClass> ClassData = new();
+        private readonly Dictionary<KanmusuDataClass, KanmusuClass> _classData = new();
 
         public KanmusuDataClass GetTypeFromName(string name)
         {
@@ -31,7 +36,7 @@ namespace Console_prototype.DB
 
         public KanmusuClass GetClassData(KanmusuDataClass cl)
         {
-            return ClassData[cl];
+            return _classData[cl];
         }
 
         public List<string> GetKanmusuNames()
@@ -106,22 +111,22 @@ namespace Console_prototype.DB
 
         private void AddKanmusuType()
         {
-            ClassData.Add(KanmusuDataClass.IseClass,KanmusuClass.AviationBattleship);
-            ClassData.Add(KanmusuDataClass.FusouClass,KanmusuClass.AviationBattleship);
-            ClassData.Add(KanmusuDataClass.KongouClass,KanmusuClass.BattleShip);
-            ClassData.Add(KanmusuDataClass.ShiratsuyuClass,KanmusuClass.Destroyer);
-            ClassData.Add(KanmusuDataClass.TakaoClass,KanmusuClass.HeavyCruiser);
-            ClassData.Add(KanmusuDataClass.MayaClass,KanmusuClass.HeavyCruiser);
-            ClassData.Add(KanmusuDataClass.MogamiClass,KanmusuClass.AviationCruiser);
-            ClassData.Add(KanmusuDataClass.ToneClass,KanmusuClass.AviationCruiser);
-            ClassData.Add(KanmusuDataClass.AdmiralHipperClass,KanmusuClass.HeavyCruiser);
-            ClassData.Add(KanmusuDataClass.AkagiClass,KanmusuClass.AircraftCarrier);
-            ClassData.Add(KanmusuDataClass.KagaClass,KanmusuClass.AircraftCarrier);
-            ClassData.Add(KanmusuDataClass.ShimakazeClass,KanmusuClass.Destroyer);
-            ClassData.Add(KanmusuDataClass.TenryuuClass,KanmusuClass.LightCruiser);
-            ClassData.Add(KanmusuDataClass.SendaiClass,KanmusuClass.LightCruiser);
-            ClassData.Add(KanmusuDataClass.NagatoClass,KanmusuClass.BattleShip);
-            ClassData.Add(KanmusuDataClass.MyoukouClass,KanmusuClass.HeavyCruiser);
+            _classData.Add(KanmusuDataClass.IseClass,KanmusuClass.AviationBattleship);
+            _classData.Add(KanmusuDataClass.FusouClass,KanmusuClass.AviationBattleship);
+            _classData.Add(KanmusuDataClass.KongouClass,KanmusuClass.BattleShip);
+            _classData.Add(KanmusuDataClass.ShiratsuyuClass,KanmusuClass.Destroyer);
+            _classData.Add(KanmusuDataClass.TakaoClass,KanmusuClass.HeavyCruiser);
+            _classData.Add(KanmusuDataClass.MayaClass,KanmusuClass.HeavyCruiser);
+            _classData.Add(KanmusuDataClass.MogamiClass,KanmusuClass.AviationCruiser);
+            _classData.Add(KanmusuDataClass.ToneClass,KanmusuClass.AviationCruiser);
+            _classData.Add(KanmusuDataClass.AdmiralHipperClass,KanmusuClass.HeavyCruiser);
+            _classData.Add(KanmusuDataClass.AkagiClass,KanmusuClass.AircraftCarrier);
+            _classData.Add(KanmusuDataClass.KagaClass,KanmusuClass.AircraftCarrier);
+            _classData.Add(KanmusuDataClass.ShimakazeClass,KanmusuClass.Destroyer);
+            _classData.Add(KanmusuDataClass.TenryuuClass,KanmusuClass.LightCruiser);
+            _classData.Add(KanmusuDataClass.SendaiClass,KanmusuClass.LightCruiser);
+            _classData.Add(KanmusuDataClass.NagatoClass,KanmusuClass.BattleShip);
+            _classData.Add(KanmusuDataClass.MyoukouClass,KanmusuClass.HeavyCruiser);
         }
     }
 }

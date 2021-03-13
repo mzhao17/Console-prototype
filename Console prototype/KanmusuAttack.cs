@@ -3,19 +3,23 @@ using Console_prototype.DB;
 
 namespace Console_prototype
 {
-    public static class KanmusuAttack
+    public sealed class KanmusuAttack
     {
+        private static readonly Lazy<KanmusuAttack> Lazy = new Lazy<KanmusuAttack> (() => new KanmusuAttack());
+        public static KanmusuAttack Instance => Lazy.Value;
+
+
         private const int MinAttack = 1;
        // private Kanmusu _kanmusu;
-        private static readonly Random Random = new ();
-        private static KanmusuDatabase _kanmusuDatabase = KanmusuDatabase.Instance;
+        private  readonly Random _random = new ();
+        private  readonly KanmusuDatabase _kanmusuDatabase = KanmusuDatabase.Instance;
 
-        static KanmusuAttack()
+        private KanmusuAttack()
         {
             
         }
 
-        public static void NormalAttack(string self, string other)
+        public  void NormalAttack(string self, string other)
         {
             var ship1 = _kanmusuDatabase.GetKanmusu()[self];
             var ship2 = _kanmusuDatabase.GetKanmusu()[other];
@@ -43,7 +47,7 @@ namespace Console_prototype
             KanmusuMediator.Instance.OnKanmusuDisplayChanged(ship1,ship2.Hp,ship2.Armour,other,ship1.FirePower,"Normal",ship1.AttackNum,self);
         }
 
-        public  static void TorpedoAttack(string self, string other)
+        public  void TorpedoAttack(string self, string other)
         {
             var ship1 = _kanmusuDatabase.GetKanmusu()[self];
             var ship2 = _kanmusuDatabase.GetKanmusu()[other];
@@ -59,12 +63,12 @@ namespace Console_prototype
             
         }
 
-        public  static  void AirAttack(string self, string other)
+        public   void AirAttack(string self, string other)
         {
             var ship1 = _kanmusuDatabase.GetKanmusu()[self];
             var ship2 = _kanmusuDatabase.GetKanmusu()[other];
             
-            var damage = KanmusuAttack.Random.Next(ship1.Aircraft / 2, ship1.Aircraft);
+            var damage = _random.Next(ship1.Aircraft / 2, ship1.Aircraft);
             ship2.Hp -= Math.Clamp(damage,MinAttack, damage);
             if (ship2.Hp < 0)
             {

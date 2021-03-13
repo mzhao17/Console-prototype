@@ -9,19 +9,18 @@ namespace Console_prototype
     {
         static void Main()
         {
-            
-            Console.Out.WriteLine(DisplayShip.PrintShip());
-            Console.Out.WriteLine(DisplayShip.PrintShip());
-            KanmusuAttack.AirAttack(KanmusuNames.Ashigara,KanmusuNames.Chikuma);
+            var attack = KanmusuAttack.Instance;
+
+            attack.AirAttack(KanmusuNames.Ashigara,KanmusuNames.Chikuma);
             Console.Out.WriteLine(DisplayShip.PrintAction());
             Console.Out.WriteLine(DisplayShip.PrintShip());
-            KanmusuAttack.TorpedoAttack(KanmusuNames.Chikuma,KanmusuNames.Ashigara);
+            attack.TorpedoAttack(KanmusuNames.Chikuma,KanmusuNames.Ashigara);
             Console.Out.WriteLine(DisplayShip.PrintAction());
             Console.Out.WriteLine(DisplayShip.PrintShip());
-            KanmusuAttack.TorpedoAttack(KanmusuNames.Ashigara,KanmusuNames.Chikuma);
+            attack.TorpedoAttack(KanmusuNames.Ashigara,KanmusuNames.Chikuma);
             Console.Out.WriteLine(DisplayShip.PrintAction());
             Console.Out.WriteLine(DisplayShip.PrintShip());
-            KanmusuAttack.AirAttack(KanmusuNames.Chikuma,KanmusuNames.Ashigara);
+            attack.AirAttack(KanmusuNames.Chikuma,KanmusuNames.Ashigara);
             Console.Out.WriteLine(DisplayShip.PrintAction());
             Console.Out.WriteLine(DisplayShip.PrintShip());
 
