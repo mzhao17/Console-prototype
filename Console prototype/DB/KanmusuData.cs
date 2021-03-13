@@ -6,23 +6,14 @@ using System.Collections.Generic;
 
 namespace Console_prototype.DB
 {
-
-
     public static class KanmusuData
     {
-        //public static KanmusuData Instance { get; } = new ();
-        
-
-
         private static readonly Dictionary<KanmusuDataClass, KanmusuStats> Data  = new();
         private static readonly Dictionary<string, KanmusuDataClass> NameData = new();
-
         private static readonly Dictionary<KanmusuDataClass, KanmusuClass> ClassData = new();
-
         public static KanmusuDataClass GetTypeFromName(string name)
         {
             return NameData[name];
-            
         }
 
         public static KanmusuStats GetStatsFromType(KanmusuDataClass type)
@@ -37,8 +28,7 @@ namespace Console_prototype.DB
 
         public static List<string> GetKanmusuNames()
         {
-            var nameList = new List<string>(NameData.Keys);
-            return nameList;
+            return new(NameData.Keys);
         }
 
         static KanmusuData()
@@ -46,7 +36,6 @@ namespace Console_prototype.DB
             AddKanmusuClass();
             AddKanmusuNameToClass();
             AddKanmusuType();
-   
         }
 
         private static void AddKanmusuNameToClass()

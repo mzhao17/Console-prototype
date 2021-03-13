@@ -1,6 +1,8 @@
 ﻿//using System;
 //using Console_prototype.DB;
 
+using System;
+
 namespace Console_prototype
 {
     public class DisplayShip
@@ -18,10 +20,11 @@ namespace Console_prototype
         public  int Damage { get; set; }
 
         public  string AttackType { get; set; }
+        
+        public KanmusuStatus Status { get; set; }
 
         public DisplayShip()
         {
-
             KanmusuMediator.Instance.KanmusuDisplayChanged += (_, e) =>
             {
                 Hp = e.Hp;
@@ -31,11 +34,25 @@ namespace Console_prototype
                 AttackType = e.AttackType;
                 Turns = e.Turns;
                 Name = e.SelfName;
+                Status = e.Flag;
             };
         }
-        
-        public string PrintShipDebug () => OtherName + " " + Hp + "/" + Armour + " :" + Turns;
-        public string PrintActionDebug () => Name + " did " + Damage + " " + AttackType + " attack to " + OtherName;
+        public string PrintShipDebug() => OtherName + " " + Hp + "/" + Armour + " :" + Turns;
+
+
+
+        public string PrintActionDebug()
+        {
+            var debugString = "";
+            debugString += Status switch
+            {
+                KanmusuStatus.Combat => Name + " did " + Damage + " " + AttackType + " attack to " + OtherName,
+                KanmusuStatus.Fainted => Name + " has fainted",
+                KanmusuStatus.NoTurnsLeft => Name + " has no turns left",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            return debugString;
+        } //
         
 
     }

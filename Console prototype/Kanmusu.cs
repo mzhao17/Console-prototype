@@ -23,11 +23,11 @@ namespace Console_prototype
 
         public int Speed { get; set; }
 
-        public int FirePower { get; set; }
+        public int FirePower { get; private set; }
 
-        public int Torpedo { get; set; }
+        public int Torpedo { get; private set; }
 
-        public int Aircraft { get; set; }
+        public int Aircraft { get; private set; }
 
         public int AttackNum { get; set; }
 

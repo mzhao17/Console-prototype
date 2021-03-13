@@ -6,30 +6,22 @@ namespace Console_prototype
     public sealed class KanmusuAttack
     {
         private const int MinAttack = 1;
-       // private Kanmusu _kanmusu;
         private  readonly Random _random = new ();
-        //private  readonly KanmusuDatabase _kanmusuDatabase = new ();
-
         private KanmusuStatus _flag;
-
         public KanmusuAttack()
         {
             ResetFlag();
         }
-
         private void ResetFlag()
         {
             _flag = KanmusuStatus.Combat;
         }
-
         public  void NormalAttack(string self, string other)
         {
-            var ship1 = KanmusuDatabase.GetKanmusu()[self];
-            var ship2 = KanmusuDatabase.GetKanmusu()[other];
-            SetStatus(ship1);
-           // Console.Out.WriteLine(_flag);
+            var ship1 = InitializeKanmusu(self, other, out var ship2);
             var damage = ship1.FirePower == 0 ? MinAttack : ship1.FirePower;
-            if (_flag == KanmusuStatus.Fainted || _flag == KanmusuStatus.NoTurnsLeft)
+            var canAttack = _flag == KanmusuStatus.Fainted || _flag == KanmusuStatus.NoTurnsLeft;
+            if (canAttack)
             {
                 damage = 0;
             }
@@ -38,7 +30,6 @@ namespace Console_prototype
                 ship2.Armour -= damage;
                 CheckArmour(ship2);
                 ship1.AttackNum -= 1;
-
             }
             else
             {
@@ -46,38 +37,34 @@ namespace Console_prototype
             }
             KanmusuMediator.Instance.OnKanmusuDisplayChanged(ship1,ship2.Hp,ship2.Armour,other,damage,"Normal",ship2.AttackNum,self,_flag);
             ResetFlag();
-
         }
+
+
+
         public  void TorpedoAttack(string self, string other)
         {
-            var ship1 = KanmusuDatabase.GetKanmusu()[self];
-            var ship2 = KanmusuDatabase.GetKanmusu()[other];
-            SetStatus(ship1);
-           // Console.Out.WriteLine(_flag);
+            var ship1 = InitializeKanmusu(self, other, out var ship2);
             var damage = ship1.Torpedo == 0 ? MinAttack : ship1.Torpedo;
-            if (_flag == KanmusuStatus.Fainted || _flag == KanmusuStatus.NoTurnsLeft)
+            var canAttack = _flag == KanmusuStatus.Fainted || _flag == KanmusuStatus.NoTurnsLeft;
+            if (canAttack)
             {
                 damage = 0;
             }
             else
             {
                 UpdateShip2(ship2, damage, ship1);
-
             }
-
             KanmusuMediator.Instance.OnKanmusuDisplayChanged(ship1,ship2.Hp,ship2.Armour,other,damage,"Torpedo",ship2.AttackNum,self,_flag);
             ResetFlag();
         }
 
         public   void AirAttack(string self, string other)
         {
-            var ship1 = KanmusuDatabase.GetKanmusu()[self];
-            var ship2 = KanmusuDatabase.GetKanmusu()[other];
-            SetStatus(ship1);
-           // Console.Out.WriteLine(_flag);
+            var ship1 = InitializeKanmusu(self, other, out var ship2);
             var damage = _random.Next(ship1.Aircraft / 2, ship1.Aircraft);
             damage = damage == 0 ? MinAttack : damage;
-            if (_flag == KanmusuStatus.Fainted || _flag == KanmusuStatus.NoTurnsLeft)
+            var canAttack = _flag == KanmusuStatus.Fainted || _flag == KanmusuStatus.NoTurnsLeft;
+            if (canAttack)
             {
                 damage = 0;
             }
@@ -85,15 +72,12 @@ namespace Console_prototype
             {
                 UpdateShip2(ship2, damage, ship1);
             }
-
             KanmusuMediator.Instance.OnKanmusuDisplayChanged(ship1,ship2.Hp,ship2.Armour,other,damage,"Air",ship2.AttackNum,self,_flag);
             ResetFlag();
         }
 
         private void SetStatus(Kanmusu ship1)
         {
-            //Console.Out.WriteLine(ship1.AttackNum);
-            
             if (ship1.AttackNum <= 0)
             {
                 _flag = KanmusuStatus.NoTurnsLeft;
@@ -126,6 +110,13 @@ namespace Console_prototype
             {
                 ship2.Hp = 0;
             }
+        }
+        private Kanmusu InitializeKanmusu(string self, string other, out Kanmusu ship2)
+        {
+            var ship1 = KanmusuDatabase.GetKanmusu()[self];
+            ship2 = KanmusuDatabase.GetKanmusu()[other];
+            SetStatus(ship1);
+            return ship1;
         }
     }
 }

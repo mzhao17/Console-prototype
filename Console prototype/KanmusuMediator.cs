@@ -6,12 +6,7 @@ namespace Console_prototype
     {
         private static readonly Lazy<KanmusuMediator> Lazy = new Lazy<KanmusuMediator>(() => new KanmusuMediator());
         public static KanmusuMediator Instance => Lazy.Value;
-
-        private KanmusuMediator()
-        {
-            
-        }
-
+        private KanmusuMediator() { }
         public event EventHandler<KanmusuDisplayEventArgs> KanmusuDisplayChanged;
 
         public void OnKanmusuDisplayChanged(object sender, int hp, int armour, string name, int damage,
