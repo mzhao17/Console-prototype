@@ -13,7 +13,7 @@ namespace Console_prototype
     {
         private static readonly Random Rand = new ();
 
-        static void Main()
+        private static void Mxain()
         {
             var attack = new KanmusuAttack(); 
             var display = new DisplayShip();
@@ -96,7 +96,7 @@ namespace Console_prototype
             }
         }
 
-        private static string TheirMove(List<string> myShips, List<string> theirShips, out string second)
+        private static string TheirMove(IReadOnlyCollection<string> myShips, IEnumerable<string> theirShips, out string second)
         {
             PrintTeams(myShips, theirShips);
             var firstNum = Rand.Next(1, 3);
@@ -150,7 +150,7 @@ namespace Console_prototype
             }
         }
 
-        private static void PrintTeams(List<string> myShips, List<string> theirShips)
+        private static void PrintTeams(IEnumerable<string> myShips, IEnumerable<string> theirShips)
         {
             Console.Out.WriteLine("Team 1:");
             Console.Out.WriteLine(PrintAll(myShips));
