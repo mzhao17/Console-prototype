@@ -13,7 +13,7 @@ namespace Console_prototype
     {
         private static readonly Random Rand = new ();
 
-        private static void Mxain()
+        private static void Main()
         {
             var attack = new KanmusuAttack(); 
             var display = new DisplayShip();
